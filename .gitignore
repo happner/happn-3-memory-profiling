@@ -21,7 +21,7 @@ logs
 
 npm-debug.log
 node_modules
-heap-dumps/*.heapsnapshot
+*.heapsnapshot
 public/*
 .idea/
 
