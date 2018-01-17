@@ -1,7 +1,7 @@
 happn-3 memory profiling
 ------------------------
 
-The profiler starts up a server, and then runs a series of tests, each time doing a GC and heap dump on the server after the tests, the testing can be looped to repeat the tests and heap dumps.
+The profiler starts up a server, and then runs a series of tests - which initialize happn-3 clients which perform a series of test operations against the server, each time doing a GC and heap dump on the server after the tests (and the clients have disconnected), the testing can be looped to repeat the tests and heap dumps.
 
 The profiler stores the tests that will be run in ./__resources/client/tests - adding any mocha tests here will result in them being run as part of the process, you can use all the mocha goodness of .only and x etc. to only profile certain tests.
 
