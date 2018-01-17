@@ -7,6 +7,8 @@ var exec = require('gulp-exec');
 var clientVersion = process.argv[2];
 var serverVersion = process.argv[3];
 
+var afterBaseLineLoopCount = process.argv[4]?parseInt(process.argv[4]):1;
+
 function updateVersion(content, file) {
 
   if (file.path.indexOf('server/package.json'))
@@ -19,16 +21,23 @@ function updateVersion(content, file) {
 }
 
 gulp.task('build', function (callback) {
-  runSequence(
-    'build-server',
+
+  var sequence = ['build-server',
     'build-client',
     'start-server',
     'run-tests-before-baseline',
-    'gc-heap-dump-baseline',
-    'run-tests-after-baseline',
-    'gc-heap-dump-post-tests',
-    'kill-server',
-    callback);
+    'gc-heap-dump-baseline'];
+
+  for (var i = 0; i < afterBaseLineLoopCount; i++){
+    sequence.push('run-tests-after-baseline');
+    sequence.push('gc-heap-dump-post-tests');
+  }
+
+  sequence.push('kill-server');
+
+  sequence.push(callback);
+
+  runSequence.apply(runSequence, sequence);
 });
 
 var child_process = require('child_process');
@@ -135,10 +144,15 @@ gulp.task('run-tests-after-baseline', function (callback) {
 
 });
 
+var heap_number = 0;
+
 gulp.task('gc-heap-dump-post-tests', function (callback) {
 
   sendMessage(server, 'GC').then(function () {
-      return sendMessage(server, 'HEAP-DMP-POST-TESTS');
+
+      heap_number++;
+
+      return sendMessage(server, 'HEAP-DMP-POST-TESTS_' + heap_number.toString());
     })
     .then(function (response) {
       callback(null, response);

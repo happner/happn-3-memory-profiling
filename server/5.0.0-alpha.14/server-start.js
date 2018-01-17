@@ -17,16 +17,15 @@ function act(message, cb){
   }
 
   if (message == 'HEAP-DMP-BASELINE')
-    return heapdump.writeSnapshot(__dirname + '/heap-dumps/0.baseline.heapsnapshot', function (err, filename) {
+    return heapdump.writeSnapshot(__dirname + '/heap-dumps/1.baseline.heapsnapshot', function (err, filename) {
       console.log('dump written to', filename);
       cb();
     });
 
 
-  if (message.indexOf('HEAP-DMP-POST-TESTS') == 0){
+  if (message == 'HEAP-DMP-POST-TESTS'){
     console.log('ON SERVER HEAP DMP:::');
-    var heapDumpNumber = message.split('_')[1];
-    return heapdump.writeSnapshot(__dirname + '/heap-dumps/' + heapDumpNumber + '.post-tests.heapsnapshot', function(err, filename) {
+    return heapdump.writeSnapshot(__dirname + '/heap-dumps/2.post-tests.heapsnapshot', function(err, filename) {
       console.log('dump written to', filename);
       cb();
     });

@@ -1,0 +1,31 @@
+
+
+  subscriptions
+    - should disconnect the disconnect client
+    ✓ the listener should pick up a single wildcard event
+    ✓ the uses the onPublished event handler
+    ✓ the listener should pick up a single published event
+    ✓ the publisher should set new data 
+    ✓ the publisher should set new data then update the data
+    ✓ the publisher should push a sibling and get all siblings
+    ✓ the listener should pick up a single published event
+    ✓ the listener should pick up a single delete event
+    ✓ the listener should pick up wildcard remove events
+    ✓ should unsubscribe from an event
+    ✓ should unsubscribe from a specific event
+    ✓ should subscribe to the catch all notification
+    ✓ should unsubscribe from all events (3017ms)
+2017-11-24 15:09:19.855 [ INFO] - 3416ms	(HappnClient) Done setting
+2017-11-24 15:09:19.857 [ INFO] - 3ms	(HappnClient) Done removing
+    ✓ will do events in the order they are passed (1015ms)
+hits::: 3
+    ✓ subscribes with a count - we ensure the event only gets kicked off for the correct amounts - negative test (1508ms)
+    ✓ subscribes with a count - we ensure the event only gets kicked off for the correct amounts (1504ms)
+    ✓ subscribe, then does an off with a bad handle (1507ms)
+    ✓ should subscribe and get initial values on the callback
+    ✓ should subscribe and get initial values emitted immediately
+
+
+  19 passing (9s)
+  1 pending
+
