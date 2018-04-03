@@ -24,6 +24,7 @@ gulp.task('build', function (callback) {
 
   var sequence = ['build-server',
     'build-client',
+    'clear-security-directory',
     'start-server',
     'run-tests-before-baseline',
     'gc-heap-dump-baseline'];
@@ -83,6 +84,29 @@ gulp.task('build-client', function () {
     .pipe(install());
 });
 
+gulp.task('clear-security-directory', function (callback) {
+
+  var url = "mongodb://localhost:27017";
+
+// create a client to mongodb
+  var MongoClient = require('mongodb').MongoClient;
+
+// make client connect to mongo service
+  MongoClient.connect(url, function(err, client) {
+
+    if (err) return callback(err);
+
+    console.log("Connected to Database!");
+
+    var db = client.db("happner-2-db-upgrade-test");
+
+    db.collection("happner-2-db-upgrade-test").drop(function(err) {
+      if (err && err.toString() != "MongoError: ns not found") return callback(err);
+      client.close();
+      callback();
+    });
+  });
+});
 
 gulp.task('start-server', function (callback) {
 

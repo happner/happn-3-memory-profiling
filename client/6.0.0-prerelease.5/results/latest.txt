@@ -102,7 +102,7 @@ received a message
 received a message
 received a message
 received a message
-    ✓ emits an event every 1 seconds for 5 seconds. (5003ms)
+    ✓ emits an event every 1 seconds for 5 seconds. (5005ms)
 
 
   2 passing (5s)

@@ -13,6 +13,12 @@ describe.only('connections', function () {
 
   var startedClients = [];
 
+  var payload = '';
+
+  var payloadLength = 100000;
+
+  for (var i = 0; i < payloadLength; i++) payload += 'A';
+
   this.timeout(DURATION + 15000);
 
   before('should initialize the clients', function (callback) {
@@ -53,7 +59,7 @@ describe.only('connections', function () {
 
       startedClients.forEach(function(client){
         messageKey++;
-        client.set('/a/test/message/' + messageKey, {key:messageKey}, {noStore:true}, function(e){
+        client.set('/a/test/message/' + messageKey, {key:messageKey, data:payload}, {noStore:true}, function(e){
           if (e) console.log('set error:::', e.toString());
         });
       });

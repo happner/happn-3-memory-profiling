@@ -18,6 +18,11 @@ test/test-temp/*
 pids
 logs
 
+client/*
+server/*
+
+!__resources/client/*
+!__resources/server/*
 
 npm-debug.log
 node_modules
